@@ -6,36 +6,37 @@
         <div class="text-center lg:text-left">
             <h1 class="text-5xl font-bold">Inscrivez-vous !</h1>
             <p class="py-6">
-                Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In
-                deleniti eaque aut repudiandae et a id nisi.
+                Commencer votre recherche de collaborations dés maintenant !
             </p>
         </div>
         <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-            <form class="card-body">
+            <form method="post" class="card-body">
                 {% for message in messages %}
-                <div class="alert alert-danger" role="alert">
-                    <h5>{{ message }}</h5>
-                </div>
+                    <div class="alert alert-danger" role="alert">
+                        <h5>{{ message }}</h5>
+                    </div>
                 {% endfor %}
                 {% csrf_token %}
+
                 {% for field in form %}
-                {% if field.name == 'role' %}
-                    <div class="flex">
-                    {% for choice in field.field.choices %}
-                    
-                    
-                        <input class="radio radio-primary" type="radio" name="{{ field.name }}" id="{{ choice.0 }}" value="{{ choice.0 }}">
-                    
-                    {% endfor %}
+                    {% if field.name == 'role' %}
+                        <div class="flex items-center mb-3">
+                            {% for choice in field.field.choices %}
+                            <input class="radio radio-primary ml-2" type="radio" name="{{ field.name }}" id="{{ choice.0 }}"
+                                value="{{ choice.0 }}">
+                            <label class="label" for="{{ choice.0 }}">
+                                {{ choice.1 }}</label>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                    <div class="form-control mb-3">
+                        {{ field }}
+                        
                     </div>
-                {% else %}
-                <div class="form-control">
-                    {{ field }}
                     {% endif %}
-                </div>
                 {% endfor %}
                 <div class="form-control mt-6">
-                    <button class="btn btn-primary">Inscription</button>
+                    <button type="submit" class="btn btn-primary">Inscription</button>
                 </div>
             </form>
         </div>

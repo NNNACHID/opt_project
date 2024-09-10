@@ -11,7 +11,7 @@ class CustomUser(AbstractUser):
         ("association", "Association"),
     )
 
-    role = models.CharField(max_length=15, choices=ROLE_CHOICES)
+    role = models.CharField(max_length=15, choices=ROLE_CHOICES, default="creator")
 
 DEFAULT_BANNER_PATH = "static/images/default_banner.jpg"
 DEFAULT_PROFILE_PICTURE_PATH = "static/images/profile_picture.jpg"

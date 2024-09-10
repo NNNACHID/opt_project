@@ -1,4 +1,5 @@
 {% load static tailwind_tags %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="en" data-theme="forest">
@@ -15,7 +16,7 @@
 <body>
     <div class="navbar bg-base-100">
         <div class="navbar-start">
-            <a class="btn text-xl"><img src="{% static './images/logo-opt.png' %}" alt="" class="max-w-24"></a>
+            <a class="btn text-xl" href="{% url 'home' %}"><img src="{% static './images/logo-opt.png' %}" alt="" class="max-w-24"></a>
         </div>
         <div class="navbar-center hidden lg:flex">
             <ul class="menu menu-horizontal">
