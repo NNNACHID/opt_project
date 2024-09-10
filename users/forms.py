@@ -17,16 +17,16 @@ class CustomUserCreationForm(UserCreationForm):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
         for field_name in ["password1", "password2"]:
             self.fields[field_name].widget.attrs.update(
-                {"class": "form-control form-control-lg"}
+                {
+                    "class": "input input-bordered",
+                    "placeholder": "Mot de passe"
+                }
             )
 
     role = forms.ChoiceField(
         choices=CustomUser.ROLE_CHOICES,
         label="",
         required=True,
-        widget=forms.RadioSelect(
-            attrs={"class": "form-check-input form-check-inline", "type": "radio"}
-        ),
     )
 
     class Meta:
@@ -43,24 +43,19 @@ class CustomUserCreationForm(UserCreationForm):
             "username": forms.TextInput(
                 attrs={
                     "placeholder": "Identifiant",
-                    "class": "form-control form-control-lg",
+                    "class": "input input-bordered",
                 }
             ),
             "email": forms.EmailInput(
-                attrs={"placeholder": "Email", "class": "form-control form-control-lg"}
+                attrs={"placeholder": "Email", "class": "input input-bordered"}
             ),
             "role": forms.CheckboxInput(
-                attrs={"class": "form-check-input", "type": "radio"}
+                attrs={"class": "radio-primary", "type": "radio"}
             ),
             "password1": forms.PasswordInput(
-                attrs={
-                    "placeholder": "Mot de passe",
-                    "class": "form-control form-control-lg",
-                }
+                
             ),
-            "password2": forms.PasswordInput(
-                attrs={"class": "form-control form-control-lg"}
-            ),
+            "password2": forms.PasswordInput(),
         }
 
 
@@ -70,14 +65,14 @@ class CustomUserUpdateForm(UserChangeForm):
         model = CustomUser
         fields = ["username", "email"]
 
-        widgets = {
-            "username": forms.TextInput(
-                attrs={
-                    "placeholder": "Identifiant",
-                    "class": "form-control",
-                }
-            ),
-            "email": forms.EmailInput(
-                attrs={"placeholder": "Email", "class": "form-control"}
-            ),
-        }
+        # widgets = {
+        #     "username": forms.TextInput(
+        #         attrs={
+        #             "placeholder": "Identifiant",
+        #             "class": "form-control",
+        #         }
+        #     ),
+        #     "email": forms.EmailInput(
+        #         attrs={"placeholder": "Email", "class": "form-control"}
+        #     ),
+        # }

@@ -12,6 +12,9 @@ from users.forms import *
 
 @require_http_methods(["GET", "POST"])
 def register(request):
+    
+    template = "users/registration.html"
+    
     if request.method == "POST":
         form = CustomUserCreationForm(data=request.POST)
         if form.is_valid():
@@ -28,4 +31,4 @@ def register(request):
     else:
         form = CustomUserCreationForm()
 
-    return render(request, "registration.html", {"form": form})
+    return render(request, template, {"form": form})
