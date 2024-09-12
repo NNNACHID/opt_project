@@ -38,6 +38,10 @@ class CustomUserCreationForm(UserCreationForm):
             "password1",
             "password2",
         ]
+        
+        labels = {
+            
+        }
 
         widgets = {
             "username": forms.TextInput(
@@ -76,3 +80,22 @@ class CustomUserUpdateForm(UserChangeForm):
         #         attrs={"placeholder": "Email", "class": "form-control"}
         #     ),
         # }
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(
+        label="Identifiant",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Identifiant",
+                "class": "input input-bordered",
+            }
+        ),
+    )
+    password = forms.CharField(
+        label="Mot de passe",
+        widget=forms.PasswordInput(
+            attrs={"placeholder": "Mot de passe", "class": "input input-bordered"}
+        ),
+    )
+

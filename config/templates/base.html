@@ -16,18 +16,38 @@
 <body>
     <div class="navbar bg-base-100">
         <div class="navbar-start">
-            <a class="btn text-xl" href="{% url 'home' %}"><img src="{% static './images/logo-opt.png' %}" alt="" class="max-w-24"></a>
+            <a class="" href="{% url 'home' %}"><img src="{% static './images/logo-opt.png' %}" alt="" class="max-w-28"></a>
         </div>
         <div class="navbar-center hidden lg:flex">
             <ul class="menu menu-horizontal">
-                <li class="mr-3"><a>Createur</a></li>
+                <li class="mr-3"><a href="{% url 'users:creators' %}">Createur</a></li>
                 <li class="mr-3"><a>Annonceurs</a></li>
                 <li class="mr-3"><a>Asoociations</a></li>
             </ul>
         </div>
         <div class="navbar-end">
-            <a class="btn btn-primary btn-outline mr-4">Connexion</a>
-            <a class="btn btn-primary mr-3"href="{% url 'users:register' %}">Inscription</a>
+            {% if user.is_authenticated %}
+            <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full">
+                        <img alt="Tailwind CSS Navbar component"
+                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                    </div>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                    <li>
+                        <a class="justify-between">
+                            Profile
+                        </a>
+                    </li>
+                    <li><a>Settings</a></li>
+                    <li><a href="{% url 'users:logout' %}">Logout</a></li>
+                </ul>
+            </div>
+            {% else %}
+            <a class="btn btn-primary btn-outline mr-4" href="{% url 'users:login' %}">Connexion</a>
+            <a class="btn btn-primary mr-3" href="{% url 'users:register' %}">Inscription</a>
+            {% endif %}
         </div>
     </div>
     <div>
@@ -36,7 +56,7 @@
     </div>
     <footer class="footer bg-base-200 text-base-content p-10">
         <aside>
-            <a class=""><img src="{% static '/images/logo-opt.png' %}" alt="" class="max-w-24 text-primary"></a>
+            <a class=""><img src="{% static '/images/logo-opt.png' %}" alt="" class="max-w-32 text-primary"></a>
         </aside>
         <nav>
             <h6 class="footer-title">A propos</h6>
