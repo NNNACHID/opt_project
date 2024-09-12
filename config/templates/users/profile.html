@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="conatiner min-h-screen bg-base-200 flex justify-center place-content-center">
+    <div class="card bg-neutral w-96 shadow-xl max-h-80 mt-36">
+        <figure>
+            <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Shoes" />
+        </figure>
+        <div class="card-body">
+            <h2 class="card-title">
+                
+                <div class="badge badge-secondary">{{profile.user.username}}</div>
+            </h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            
+                <p>{{profile.user_id}}</p>
+            
+            <div class="card-actions justify-end">
+                <div class="badge badge-outline">Fashion</div>
+                <div class="badge badge-outline">Products</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
