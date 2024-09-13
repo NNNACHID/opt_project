@@ -6,7 +6,7 @@ from django.contrib.auth.forms import (
     UserChangeForm,
 )
 
-from users.models import CustomUser
+from users.models import CustomUser, CustomUserProfile
 
 User = get_user_model()
 
@@ -99,3 +99,37 @@ class CustomAuthenticationForm(AuthenticationForm):
         ),
     )
 
+
+class CustomUserProfileForm(forms.ModelForm):
+    
+    class Meta:
+        
+        model = CustomUserProfile
+        
+        fields = [
+            "banner",
+            "profile_picture",
+            "title",
+            "description",
+            "contact_mail",
+        ]
+
+        widgets = {
+            "banner": forms.FileInput(attrs={"class": "form-control", "type": "file"}),
+            "profile_picture": forms.FileInput(
+                attrs={"class": "form-control", "type": "file"}
+            ),
+            "title": forms.Textarea(
+                attrs={"class": "form-control", "rows": "1", "maxlength": "64"}
+            ),
+            "description": forms.Textarea(
+                attrs={"class": "form-control", "rows": "3"}
+            ),
+            "contact_mail": forms.EmailInput(
+                attrs={
+                    "placeholder": "Email de contact",
+                    "class": "form-control",
+                    "type": "email",
+                }
+            ),
+        }

@@ -64,7 +64,6 @@ def get_profile(request, pk):
     return render(request, template, context)
 
 
-
 def get_profile_list_by_type(request):
 
     url_name = resolve(request.path_info).url_name
@@ -85,3 +84,36 @@ def get_profile_list_by_type(request):
             "profiles": CustomUserProfile.objects.filter(user__role="association")
         }
         return render(request, template, context)
+
+
+@login_required(login_url="login")
+def update_user(request):
+    template = "users/account.html"
+    user = request.user
+    profile = user.customuserprofile
+    if request.method == "POST":
+        user_form = CustomUserUpdateForm(request.POST or None, instance=user)
+        profile_form = CustomUserProfileForm(
+            request.POST or None, request.FILES, instance=profile
+        )
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+
+            services = []
+            profile.save()
+
+            messages.success(request, "Profil mis à jour ! ")
+            return redirect("home")
+    else:
+        user_form = CustomUserUpdateForm(instance=user)
+        profile_form = CustomUserProfileForm(instance=profile)
+    return render(
+        request,
+        template,
+        {
+            "user_form": user_form,
+            "profile_form": profile_form,
+        },
+    )

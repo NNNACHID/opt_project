@@ -13,8 +13,8 @@ class CustomUser(AbstractUser):
 
     role = models.CharField(max_length=15, choices=ROLE_CHOICES, default="creator")
 
-DEFAULT_BANNER_PATH = "static/images/default_banner.jpg"
-DEFAULT_PROFILE_PICTURE_PATH = "static/images/profile_picture.jpg"
+DEFAULT_BANNER_PATH = "images/default_banner.jpg"
+DEFAULT_PROFILE_PICTURE_PATH = "/theme/static/images/default-profile-picture.jpg"
 TEXT_FIELD_OPTIONS = {
     "null": True,
     "blank": True,
