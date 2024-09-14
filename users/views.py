@@ -94,14 +94,12 @@ def update_user(request):
     if request.method == "POST":
         user_form = CustomUserUpdateForm(request.POST or None, instance=user)
         profile_form = CustomUserProfileForm(
-            request.POST or None, request.FILES, instance=profile
+            request.POST or None, request.FILES or None, instance=profile
         )
 
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-
-            services = []
             profile.save()
 
             messages.success(request, "Profil mis à jour ! ")

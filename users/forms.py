@@ -63,25 +63,6 @@ class CustomUserCreationForm(UserCreationForm):
         }
 
 
-class CustomUserUpdateForm(UserChangeForm):
-
-    class Meta:
-        model = CustomUser
-        fields = ["username", "email"]
-
-        # widgets = {
-        #     "username": forms.TextInput(
-        #         attrs={
-        #             "placeholder": "Identifiant",
-        #             "class": "form-control",
-        #         }
-        #     ),
-        #     "email": forms.EmailInput(
-        #         attrs={"placeholder": "Email", "class": "form-control"}
-        #     ),
-        # }
-
-
 class CustomAuthenticationForm(AuthenticationForm):
     username = forms.CharField(
         label="Identifiant",
@@ -100,12 +81,31 @@ class CustomAuthenticationForm(AuthenticationForm):
     )
 
 
-class CustomUserProfileForm(forms.ModelForm):
-    
+class CustomUserUpdateForm(UserChangeForm):
+
     class Meta:
-        
+        model = CustomUser
+        fields = ["username", "email"]
+
+        widgets = {
+            "username": forms.TextInput(
+                attrs={
+                    "placeholder": "Identifiant",
+                    "class": "input input-bordered",
+                }
+            ),
+            "email": forms.EmailInput(
+                attrs={"placeholder": "Email", "class": "input input-bordered"}
+            ),
+        }
+
+
+class CustomUserProfileForm(forms.ModelForm):
+
+    class Meta:
+
         model = CustomUserProfile
-        
+
         fields = [
             "banner",
             "profile_picture",
@@ -115,20 +115,26 @@ class CustomUserProfileForm(forms.ModelForm):
         ]
 
         widgets = {
-            "banner": forms.FileInput(attrs={"class": "form-control", "type": "file"}),
+            "banner": forms.FileInput(
+                attrs={
+                    "class": "file-input file-input-bordered w-full max-w-xs",
+                    "type": "file",
+                }
+            ),
             "profile_picture": forms.FileInput(
-                attrs={"class": "form-control", "type": "file"}
+                attrs={
+                    "class": "file-input file-input-bordered w-full max-w-xs",
+                    "type": "file",
+                }
             ),
             "title": forms.Textarea(
-                attrs={"class": "form-control", "rows": "1", "maxlength": "64"}
+                attrs={"class": "textarea", "rows": "1", "maxlength": "64"}
             ),
-            "description": forms.Textarea(
-                attrs={"class": "form-control", "rows": "3"}
-            ),
+            "description": forms.Textarea(attrs={"class": "textarea", "rows": "3"}),
             "contact_mail": forms.EmailInput(
                 attrs={
                     "placeholder": "Email de contact",
-                    "class": "form-control",
+                    "class": "input input-bordered",
                     "type": "email",
                 }
             ),
