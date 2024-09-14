@@ -13,8 +13,8 @@ class CustomUser(AbstractUser):
 
     role = models.CharField(max_length=15, choices=ROLE_CHOICES, default="creator")
 
-DEFAULT_BANNER_PATH = "images/default_banner.jpg"
-DEFAULT_PROFILE_PICTURE_PATH = "/theme/static/images/default-profile-picture.jpg"
+DEFAULT_BANNER_PATH = "banners/default_banner.jpg"
+DEFAULT_PROFILE_PICTURE_PATH = "profile_pictures/default-profile-picture.jpg"
 TEXT_FIELD_OPTIONS = {
     "null": True,
     "blank": True,
@@ -63,13 +63,13 @@ class CustomUserProfile(models.Model):
     partners = models.JSONField(default=dict)
 
     banner = models.ImageField(
-        upload_to="static/banners/",
+        upload_to="banners/",
         blank=True,
         null=True,
         default=DEFAULT_BANNER_PATH,
     )
     profile_picture = models.ImageField(
-        upload_to="static/profile_pictures/",
+        upload_to="profile_pictures/",
         blank=True,
         null=True,
         default=DEFAULT_PROFILE_PICTURE_PATH,

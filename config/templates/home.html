@@ -7,8 +7,10 @@
     <div class="hero-content text-neutral-content text-center">
         <div class="max-wd-lg">
             {% for message in messages %}
-            <div class="alert alert-primary text-center" role="alert">
-                <h5>{{ message }}</h5>
+            <div class="flex justify-center mb-5">
+                <div class="alert alert-success max-w-sm flex justify-center" role="alert">
+                    <h5>{{ message }}</h5>
+                </div>
             </div>
             {% endfor %}
             <h1 class="mb-5 text-5xl font-bold">Connectez votre creativité</h1>
