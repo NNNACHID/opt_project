@@ -101,6 +101,17 @@ class CustomUserUpdateForm(UserChangeForm):
 
 
 class CustomUserProfileForm(forms.ModelForm):
+    
+    # def __init__(self, *args, **kwargs):
+    #     super(CustomUserProfileForm, self).__init__(*args, **kwargs)
+    #     for field_name in ["banner", "profile_picture"]:
+    #         self.fields[field_name].widget.attrs.update(
+    #             {
+    #                 "class": "",
+    #                 "placeholder": "Choose"
+    #             }
+    #         )
+    
 
     class Meta:
 
@@ -117,20 +128,30 @@ class CustomUserProfileForm(forms.ModelForm):
         widgets = {
             "banner": forms.FileInput(
                 attrs={
-                    "class": "file-input file-input-bordered w-full max-w-xs",
-                    "type": "file",
+                    
                 }
             ),
             "profile_picture": forms.FileInput(
                 attrs={
-                    "class": "file-input file-input-bordered w-full max-w-xs",
-                    "type": "file",
+                    "class": "",
+                    
                 }
             ),
             "title": forms.Textarea(
-                attrs={"class": "textarea", "rows": "1", "maxlength": "64"}
+                attrs={
+                    "class": "textarea",
+                    "rows": "1",
+                    "maxlength": "64",
+                    "placeholder": "Titre",
+                }
             ),
-            "description": forms.Textarea(attrs={"class": "textarea", "rows": "3"}),
+            "description": forms.Textarea(
+                attrs={
+                    "class": "textarea",
+                    "rows": "3",
+                    "placeholder": "Description",
+                }
+            ),
             "contact_mail": forms.EmailInput(
                 attrs={
                     "placeholder": "Email de contact",

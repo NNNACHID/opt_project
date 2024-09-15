@@ -1,24 +1,55 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="min-h-screen bg-base-300 py-32">
-    <div class="container min-h-screen bg-base-300 flex justify-center w-full mx-auto">
-                <div class="card bg-base-100 w-full max-w-md  shrink-0 shadow-2xl">
+<div class="min-h-screen bg-base-300 py-28">
+    <div class="container  bg-base-300 flex justify-center w-full mx-auto">
+                <div class="card bg-base-100 w-full max-w-lg  shrink-0 shadow-2xl">
                     <h1 class="text-4xl font-bold text-center mt-4 mx-3">Compte</h1>
                     <form method="post" enctype="multipart/form-data" class="card-body">
+                        {{ user_form.non_field_errors }}
+                        {{ profile_form.non_field_errors }}
                         {% for message in messages %}
                         <div class="alert alert-danger" role="alert">
                             <h5>{{ message }}</h5>
                         </div>
                         {% endfor %}
                         {% csrf_token %}
-                        {% for field in user_form %}
-                        <div class="form-control">
+                        <div class="form-control mb-4">
                             <label class="label"><span class="">{{ field.label }}</span></label>
-                            {{ field }}
+                            {{ user_form.username }}
+                            {{ user_form.username.errors }}
                         </div>
-                        {% endfor %}
-                        {% for field in profile_form %}
+                        <div class="form-control mb-4">
+                            <label class="label"><span class="">{{ field.label }}</span></label>
+                            {{ user_form.email }}
+                            {{ user_form.email.errors }}
+                        </div>
+                        <div class="form-control mb-4">
+                            <label class="label"><span class="label-text">Banniere</span></label>
+                            <input id="banner" name="banner" type="file" class="file-input file-input-bordered file-input-primary">
+                            {{ profile_form.banner.errors }}
+                        </div>
+                        <div class="form-control mb-4">
+                            <label class="label"><span class="label-text">Photo de profil</span></label>
+                            <input id="banner" name="profile_picture" type="file" class="file-input file-input-bordered file-input-primary" placeholder="Choisisssez">
+                            {{ profile_form.profile_picture.errors }}
+                        </div>
+                        <div class="form-control mb-4">
+                            {{ profile_form.title }}
+                            {{ profile_form.title.errors }}
+                        </div>
+                        <div class="form-control mb-4">
+                            {{ profile_form.description }}
+                            {{ profile_form.description.errors }}
+                        </div>
+                        <div class="form-control mb-4">
+                            {{ profile_form.contact_mail }}
+                            {{ profile_form.contact_mail.errors }}
+                        </div>
+
+
+
+                        <!-- {% for field in profile_form %}
                         <div class="form-control">
                             {% if field.name == "profile_picture" or field.name == "banner" %}
                                 {{ field }}
@@ -27,10 +58,10 @@
                                 {{ field }}
                             {% endif %}
                         </div>
-                        {% endfor %}
+                        {% endfor %} -->
 
                         <div class="form-control mt-6">
-                            <button class="btn btn-primary">Login</button>
+                            <button class="btn btn-primary">Enregistrer</button>
                         </div>
                     </form>
                 </div>
