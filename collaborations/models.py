@@ -38,14 +38,14 @@ class Campaign(Collaboration):
     collaborators = models.ManyToManyField(
         CustomUser, related_name="campaigns_participated"
     )
-    # partner = models.ForeignKey(
-    #     CustomUser,
-    #     on_delete=models.CASCADE,
-    #     related_name="campaign_partner",
-    #     limit_choices_to={"user_type": "advertiser"},
-    #     null=True,
-    #     blank=True,
-    # )
+    partner = models.ForeignKey(
+        CustomUser,
+        on_delete=models.CASCADE,
+        related_name="campaign_partner",
+        limit_choices_to={"role": "advertiser"},
+        null=True,
+        blank=True,
+    )
 
     class Meta:
         verbose_name = _("Campaign")

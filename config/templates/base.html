@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div class="navbar bg-base-100">
+    <div class="navbar bg-base-200">
         <div class="navbar-start">
             <a class="" href="{% url 'home' %}"><img src="{% static './images/logo-opt.png' %}" alt="" class="max-w-28"></a>
         </div>
@@ -40,9 +40,9 @@
                             Profile
                         </a>
                     </li>
-                    <li><a href="">Collaborations</a></li>
-                    <li><a href="{% url 'users:account' %}">Settings</a></li>
-                    <li><a href="{% url 'users:logout' %}">Logout</a></li>
+                    <li><a href="{% url 'collaborations:collaborations_list' user.pk %}">Collaborations</a></li>
+                    <li><a href="{% url 'users:account' %}">Compte</a></li>
+                    <li><a href="{% url 'users:logout' %}">Deconnexion</a></li>
                 </ul>
             </div>
             {% else %}

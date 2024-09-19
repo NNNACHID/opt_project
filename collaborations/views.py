@@ -10,14 +10,53 @@ from collaborations.forms import *
 
 from formtools.wizard.views import SessionWizardView
 
+CREATION_FORMS = [
+    CampaignCreationStepOneForm,
+    CampaignCreationStepTwoForm,
+    CampaignCreationStepThreeForm,
+    CampaignCreationStepFourForm,
+]
+
+# JOINING_FORMS = [CampaignJoiningStepOneForm, CampaignJoiningStepTwoForm]
+
+
+class CampaignCreationWizardView(SessionWizardView):
+    form_list = CREATION_FORMS
+    template_name = "campaign_creation.html"
+
+    def done(self, form_list, **kwargs):
+        pk = self.request.user.pk
+        form_data = [form.cleaned_data for form in form_list]
+        campaign = Campaign(
+            name=form_data[0]["name"],
+            start_date=form_data[0]["start_date"],
+            end_date=form_data[0]["end_date"],
+            description=form_data[1]["description"],
+            partner=form_data[2]["partner"],
+            campaign_creator=self.request.user,
+        )
+        campaign.save()
+        # partner_request = CampaignPartnerRequest.objects.create(
+        #     campaign=campaign, partner=campaign.partner
+        # )
+        # partner_request.save()
+        messages.success(self.request, "Campagne créée avec succès!")
+        return redirect("campaigns:campaigns_list", pk)
+
 
 @login_required(login_url="users:login")
-def get_campaigns_list(request, pk):
+def create_campaign(request):
+    wizard_view = CampaignCreationWizardView.as_view()
+    return wizard_view(request)
+
+
+@login_required(login_url="users:login")
+def get_collaborations_list(request, pk):
 
     user = get_object_or_404(CustomUser, pk=pk)
     campaigns_with_collaborators = []
 
-    campaigns_created = Campaign.objects.filter(campaign_creator=user)
+    campaigns_created = Campaign.objects.filter(collaboration_creator=user)
     for campaign in campaigns_created:
         campaign_data = {
             "campaign": campaign,
@@ -37,4 +76,4 @@ def get_campaigns_list(request, pk):
         "campaigns_with_collaborators": campaigns_with_collaborators,
         "campaign_page_user": user,
     }
-    return render(request, "campaigns_list.html", context)
+    return render(request, "campaigns/campaigns_list.html", context)
