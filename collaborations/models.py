@@ -18,10 +18,6 @@ class Collaboration(models.Model):
     class Meta: 
         abstract = True
         constraints = [
-            # models.CheckConstraint(
-            #     check=models.Q(start_date__gte=models.F("created_at")),
-            #     name="start_date_must_be_after_creation_date",
-            # ),
             models.CheckConstraint(
                 check=models.Q(end_date__gte=models.F("start_date")),
                 name="end_date_must_be_after_start_date",

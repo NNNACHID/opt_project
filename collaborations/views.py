@@ -22,7 +22,7 @@ CREATION_FORMS = [
 
 class CampaignCreationWizardView(SessionWizardView):
     form_list = CREATION_FORMS
-    template_name = "campaign_creation.html"
+    template_name = "collaborations/campaign_creation.html"
 
     def done(self, form_list, **kwargs):
         pk = self.request.user.pk
@@ -76,4 +76,4 @@ def get_collaborations_list(request, pk):
         "campaigns_with_collaborators": campaigns_with_collaborators,
         "campaign_page_user": user,
     }
-    return render(request, "campaigns/campaigns_list.html", context)
+    return render(request, "collaborations/campaigns_list.html", context)

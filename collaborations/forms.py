@@ -14,19 +14,19 @@ class CampaignCreationStepOneForm(forms.ModelForm):
         widgets = {
             "name": forms.TextInput(
                 attrs={
-                    "class": "",
+                    "class": "input",
                     "placeholder": _("Nom de la campagne"),
                 }
             ),
             "start_date": forms.DateInput(
                 attrs={
-                    "class": "",
+                    "class": "input",
                     "placeholder": _("Début de la campagne"),
                 }
             ),
             "end_date": forms.DateInput(
                 attrs={
-                    "class": "",
+                    "class": "input",
                     "placeholder": _("Fin de la campagne"),
                 }
             ),
@@ -37,7 +37,6 @@ class CampaignCreationStepOneForm(forms.ModelForm):
             "start_date": _("Début"),
             "end_date": _("Fin"),
         }
-
 
 class CampaignCreationStepTwoForm(forms.ModelForm):
 
@@ -56,7 +55,6 @@ class CampaignCreationStepTwoForm(forms.ModelForm):
             )
         }
 
-
 class CampaignCreationStepThreeForm(forms.Form):
 
     partner = forms.ModelChoiceField(
@@ -70,7 +68,6 @@ class CampaignCreationStepThreeForm(forms.Form):
         model = Campaign
         fields = ["partner"]
 
-
 class CampaignCreationStepFourForm(forms.Form):
 
     accept_legal_terms = forms.BooleanField(
@@ -79,31 +76,3 @@ class CampaignCreationStepFourForm(forms.Form):
         ),
         required=True,
     )
-
-
-# class CampaignJoiningStepOneForm(forms.ModelForm):
-
-#     class Meta:
-#         model = CampaignCollaboratorRequest
-#         fields = [
-#             "message",
-#         ]
-
-#         widgets = {
-#             "message": forms.Textarea(
-#                 attrs={
-#                     "class": "form-control",
-#                     "placeholder": "Ecrivez un message décrivant votre",
-#                 }
-#             )
-#         }
-
-
-# class CampaignJoiningStepTwoForm(forms.Form):
-
-#     accept_legal_terms = forms.BooleanField(
-#         widget=forms.CheckboxInput(
-#             attrs={"class": "form-check-input", "type": "radio"}
-#         ),
-#         required=True,
-#     )

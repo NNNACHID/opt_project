@@ -10,7 +10,8 @@
     {% tailwind_css %}
     <link rel="icon" href="{% static '/images/title-logo.png' %}" type="image/x-icon" />
     <title>Opt.</title>
-
+    {% block head %}
+    {% endblock %}
 </head>
 
 <body>
@@ -75,6 +76,8 @@
             <a class="link link-hover">Connexion</a>
         </nav>
     </footer>
+    {% block scripts %}
+    {% endblock %}
 </body>
 
 </html>
