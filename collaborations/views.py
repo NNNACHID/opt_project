@@ -33,7 +33,7 @@ class CampaignCreationWizardView(SessionWizardView):
             end_date=form_data[0]["end_date"],
             description=form_data[1]["description"],
             partner=form_data[2]["partner"],
-            campaign_creator=self.request.user,
+            collaboration_creator=self.request.user,
         )
         campaign.save()
         # partner_request = CampaignPartnerRequest.objects.create(
@@ -41,7 +41,7 @@ class CampaignCreationWizardView(SessionWizardView):
         # )
         # partner_request.save()
         messages.success(self.request, "Campagne créée avec succès!")
-        return redirect("campaigns:campaigns_list", pk)
+        return redirect("collaborations:collaborations_list", pk)
 
 
 @login_required(login_url="users:login")
@@ -56,24 +56,24 @@ def get_collaborations_list(request, pk):
     user = get_object_or_404(CustomUser, pk=pk)
     campaigns_with_collaborators = []
 
-    campaigns_created = Campaign.objects.filter(collaboration_creator=user)
-    for campaign in campaigns_created:
+    campaigns = Campaign.objects.filter(collaboration_creator=user)
+    for campaign in campaigns:
         campaign_data = {
             "campaign": campaign,
             "collaborators": campaign.collaborators.all(),
         }
         campaigns_with_collaborators.append(campaign_data)
 
-    collaborations = Campaign.objects.filter(collaborators=user)
-    for campaign in collaborations:
-        campaign_data = {
-            "campaign": campaign,
-            "collaborators": campaign.collaborators.all(),
-        }
-        campaigns_with_collaborators.append(campaign_data)
+    # collaborations = Campaign.objects.filter(collaborators=user)
+    # for campaign in collaborations:
+    #     campaign_data = {
+    #         "campaign": campaign,
+    #         "collaborators": campaign.collaborators.all(),
+    #     }
+    #     campaigns_with_collaborators.append(campaign_data)
 
     context = {
-        "campaigns_with_collaborators": campaigns_with_collaborators,
+        "campaigns": campaigns,
         "campaign_page_user": user,
     }
     return render(request, "collaborations/campaigns_list.html", context)

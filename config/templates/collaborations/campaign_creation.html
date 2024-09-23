@@ -24,17 +24,17 @@
             {% endif %}
             <ul class="steps steps-vertical lg:steps-horizontal">
                 <li class="step step-primary">Register</li>
-                {% if wizard.steps.current == '1' %}
+                {% if wizard.steps.current >= '1' %}
                 <li class="step step-primary">Choose plan</li>
                 {% else %}
                 <li class="step">Choose plan</li>
                 {% endif %}
-                {% if wizard.steps.current == '2' %}
+                {% if wizard.steps.current >= '2' %}
                 <li class="step step-primary">Purchase</li>
                 {% else %}
                 <li class="step">Purchase</li>
                 {% endif %}
-                {% if wizard.steps.current == '3' %}
+                {% if wizard.steps.current >= '3' %}
                 <li class="step step-primary">Receive Product</li>
                 {% else %}
                 <li class="step">Receive Product</li>
@@ -49,7 +49,7 @@
                 {% endfor %}
                 {% else %}
                 {% if wizard.steps.current == '3' %}
-                {% include 'partials/terms_of_service.html' %}
+                
                 {{ form|crispy }}
                 {% else %}
                 {{ wizard.form|crispy }}
@@ -85,6 +85,6 @@
 
 {% block scripts %}
 <script>
-    $("#id_2-partner").select2();
+    
 </script>
 {% endblock %}

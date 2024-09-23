@@ -23,7 +23,7 @@
             <ul class="menu menu-horizontal">
                 <li class="mr-3"><a href="{% url 'users:creators' %}">Createur</a></li>
                 <li class="mr-3"><a>Annonceurs</a></li>
-                <li class="mr-3"><a>Asoociations</a></li>
+                <li class="mr-3"><a>Associations</a></li>
             </ul>
         </div>
         <div class="navbar-end">
@@ -35,7 +35,7 @@
                             src="{{user.customuserprofile.profile_picture.url}}" />
                     </div>
                 </div>
-                <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                     <li>
                         <a class="justify-between" href="{% url 'users:profile' user.pk %}">
                             Profile

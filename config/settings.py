@@ -53,6 +53,8 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
+DATE_INPUT_FORMATS = ['%d %B %Y']
+
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
 CRISPY_TEMPLATE_PACK = "tailwind"

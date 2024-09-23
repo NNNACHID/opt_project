@@ -21,12 +21,14 @@ class CampaignCreationStepOneForm(forms.ModelForm):
             "start_date": forms.DateInput(
                 attrs={
                     "class": "input",
+                    "type": "date",
                     "placeholder": _("Début de la campagne"),
                 }
             ),
             "end_date": forms.DateInput(
                 attrs={
                     "class": "input",
+                    "type": "date",
                     "placeholder": _("Fin de la campagne"),
                 }
             ),
