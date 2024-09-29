@@ -2,42 +2,11 @@
 
 {% block content %}
 <div class="min-h-screen">
-    <header class="bg-base-100">
-        <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-            <div class="mb-12">
-                <h1
-                    class="text-center text-white text-3xl font-extrabold  sm:text-5xl">
-                    Collabs
-                
-                </h1>
-            </div>
-            
-
-            <div class="flex flex-col  gap-4 xl:flex-row md:items-center md:justify-center">
-                <div class="flex items-center gap-4">
-                    <button
-                        class="btn btn-primary"
-                        type="button">
-                        Campagnes crée
-                    </button>
-                    <button
-                        class="btn btn-primary"
-                        type="button">
-                        Campagnes participées
-                    </button>
-                    <button
-                        class="btn btn-primary"
-                        type="button">
-                        Demandes de participation
-                    </button>
-                    <a class="btn btn-primary mr-4" href="{% url 'collaborations:campaign_creation' %}">Crée une campagne</a>
-                </div>
-            </div>
-        </div>
-    </header>
+    {% include 'collaborations/partials/campaign_menu.html' %}
     <div class="container mx-auto bg-base-200 p-12 box-border rounded-lg mb-12">
         <div class="flex flex-col items-center">
             {% for campaign in campaigns %}
+            <a href="#" class="text-decoration-none">
             <article class="rounded-lg  bg-base-100 p-4 shadow-sm transition hover:shadow-xl sm:p-6 mb-9">
                 <span class="inline-block rounded bg-primary p-2 text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -61,15 +30,8 @@
                     itaque minus soluta, voluptates neque explicabo tempora nisi culpa eius atque dignissimos.
                     Molestias explicabo corporis voluptatem?
                 </p>
-            
-                <a href="#" class="group mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
-                    Détails
-            
-                    <span aria-hidden="true" class="block transition-all group-hover:ms-0.5 rtl:rotate-180">
-                        &rarr;
-                    </span>
-                </a>
             </article>
+            </a>
             {% endfor %}
         </div>
     </div>

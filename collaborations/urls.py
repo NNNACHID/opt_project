@@ -14,4 +14,9 @@ urlpatterns = [
         create_campaign,
         name="campaign_creation",
     ),
+    path(
+        "campaign/<int:campaign_pk>/<int:campaign_user_pk>/",
+        get_campaign_page,
+        name="campaign_page",
+    ),
 ]

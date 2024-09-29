@@ -1,0 +1,27 @@
+<header class="bg-base-100">
+    <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <div class="mb-12">
+            <h1 class="text-center text-white text-3xl font-extrabold  sm:text-5xl">
+                Collabs
+
+            </h1>
+        </div>
+
+
+        <div class="flex flex-col  gap-4 xl:flex-row md:items-center md:justify-center">
+            <div class="flex items-center gap-4">
+                <button class="btn btn-primary" type="button">
+                    Campagnes crée
+                </button>
+                <button class="btn btn-primary" type="button">
+                    Campagnes participées
+                </button>
+                <button class="btn btn-primary" type="button">
+                    Demandes de participation
+                </button>
+                <a class="btn btn-primary mr-4" href="{% url 'collaborations:campaign_creation' %}">Crée une
+                    campagne</a>
+            </div>
+        </div>
+    </div>
+</header>
