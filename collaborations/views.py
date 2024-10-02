@@ -80,16 +80,13 @@ def get_collaborations_list(request, pk):
 
 
 @login_required(login_url="users:login")
-def get_campaign_page(request, campaign_pk, campaign_user_pk):
+def get_campaign_page(request, campaign_pk):
 
     campaign = get_object_or_404(Campaign, pk=campaign_pk)
-    user = get_object_or_404(CustomUser, pk=campaign_user_pk)
-
-    # collaborators = campaign.collaborators.all()
+    # user = get_object_or_404(CustomUser, pk=campaign_user_pk)
 
     context = {
         "campaign": campaign,
-        "collaborators": collaborators,
-        "campaign_page_user": user,
+        # "campaign_page_user": user,
     }
-    return render(request, "campaign.html", context)
+    return render(request, "collaborations/campaign_page.html", context)

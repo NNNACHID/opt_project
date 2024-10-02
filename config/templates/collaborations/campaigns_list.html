@@ -6,31 +6,30 @@
     <div class="container mx-auto bg-base-200 p-12 box-border rounded-lg mb-12">
         <div class="flex flex-col items-center">
             {% for campaign in campaigns %}
-            <a href="#" class="text-decoration-none">
-            <article class="rounded-lg  bg-base-100 p-4 shadow-sm transition hover:shadow-xl sm:p-6 mb-9">
-                <span class="inline-block rounded bg-primary p-2 text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path d="M12 14l9-5-9-5-9 5 9 5z" />
-                        <path
-                            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
-                    </svg>
-                </span>
-            
-                <a href="#">
-                    <h3 class="mt-0.5 text-lg font-medium text-white">
-                        {{campaign.name}}
-                    </h3>
-                </a>
-            
-                <p class="mt-2 line-clamp-3 text-sm/relaxed text-white">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae dolores, possimus pariatur
-                    animi temporibus nesciunt praesentium dolore sed nulla ipsum eveniet corporis quidem, mollitia
-                    itaque minus soluta, voluptates neque explicabo tempora nisi culpa eius atque dignissimos.
-                    Molestias explicabo corporis voluptatem?
-                </p>
-            </article>
+            <a href="{% url 'collaborations:campaign_page' campaign_pk=campaign.pk %}" class="text-decoration-none">
+                <article class="rounded-lg  bg-base-100 p-4 shadow-sm transition hover:shadow-xl sm:p-6 mb-9">
+                    <span class="inline-block rounded bg-primary p-2 text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                            <path
+                                d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                        </svg>
+                    </span>
+
+                        <h3 class="mt-0.5 text-lg font-medium text-white">
+                            {{campaign.pk}}
+                        </h3>
+
+                    <p class="mt-2 line-clamp-3 text-sm/relaxed text-white">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae dolores, possimus pariatur
+                        animi temporibus nesciunt praesentium dolore sed nulla ipsum eveniet corporis quidem, mollitia
+                        itaque minus soluta, voluptates neque explicabo tempora nisi culpa eius atque dignissimos.
+                        Molestias explicabo corporis voluptatem?
+                    </p>
+                </article>
             </a>
             {% endfor %}
         </div>
