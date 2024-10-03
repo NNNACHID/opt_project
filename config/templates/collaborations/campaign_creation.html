@@ -9,8 +9,8 @@
 
 {% block content %}
 <div class="container flex justify-center align-center min-h-screen min-w-full">
-    <div class="bg-base-300 shadow my-9 card">
-        <div class="p-3 rounded-4 mb-3 text-center">
+    <div class="bg-base-300 shadow card p-6 mb-24 mt-9">
+        <div class="p-3 rounded mb-3 text-center bg-primary font-black text-xl">
             <h2 class="ml-2">Créer une campagne</h2>
             <p class="px-1">Suivez les étapes afin de créée votre campagne</p>
         </div>
@@ -22,7 +22,7 @@
             {% if wizard.steps.current == '0' %}
             {% else %}
             {% endif %}
-            <ul class="steps steps-vertical lg:steps-horizontal">
+            <ul class="steps steps-vertical lg:steps-horizontal mb-6">
                 <li class="step step-primary">Register</li>
                 {% if wizard.steps.current >= '1' %}
                 <li class="step step-primary">Choose plan</li>
@@ -56,23 +56,20 @@
                 {% endif %}
                 {% endif %}
             </table>
-
             <div class="flex justify-around">
                 {% if wizard.steps.current == wizard.steps.last %}
                 <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}"
-                    class="btn ">{% translate "prev
-                    step"%}</button>
-                <button type="submit" class="btn ">Valider
+                    class="btn btn-primary">Étape précédente</button>
+                <button type="submit" class="btn btn-primary">Valider
                     !</button>
                 {% else %}
                 {% if wizard.steps.prev %}
                 <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}"
-                    class="btn ">{% translate "prev
-                    step"%}</button>
-                <button type="submit" class="btn ">Étape
+                    class="btn btn-primary mt-6">Étape précédente</button>
+                <button type="submit" class="btn btn-primary mt-6">Étape
                     suivante</button>
                 {% else %}
-                <button type="submit" class="btn ">Étape
+                <button type="submit" class="btn btn-primary mt-6">Étape
                     suivante</button>
                 {% endif %}
                 {% endif %}

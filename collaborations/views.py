@@ -17,7 +17,7 @@ CREATION_FORMS = [
     CampaignCreationStepFourForm,
 ]
 
-# JOINING_FORMS = [CampaignJoiningStepOneForm, CampaignJoiningStepTwoForm]
+JOINING_FORMS = [CampaignJoiningStepOneForm, CampaignJoiningStepTwoForm]
 
 
 class CampaignCreationWizardView(SessionWizardView):
@@ -48,6 +48,15 @@ class CampaignCreationWizardView(SessionWizardView):
 def create_campaign(request):
     wizard_view = CampaignCreationWizardView.as_view()
     return wizard_view(request)
+
+
+@login_required
+def join_campaign(request, campaign_pk, campaign_user_pk):
+
+    campaign = get_object_or_404(Campaign, pk=campaign_pk)
+    campaign_page_user = get_object_or_404(CustomUser, pk=campaign_user_pk)
+    wizard_view = CampaignJoiningWizardView.as_view()
+    return wizard_view(request, campaign=campaign)
 
 
 @login_required(login_url="users:login")

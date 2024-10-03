@@ -30,27 +30,25 @@
             <div class="col-span-4 sm:col-span-3">
                 <div class="bg-base-100 shadow rounded-lg p-6">
                     <div class="flex flex-col items-center">
-                        <img src="{{user.customuserprofile.profile_picture.url}}"
+                        <img src="{{profile.profile_picture.url}}"
                             class="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0">
 
                         </img>
                         <h1 class="text-xl font-bold">{{profile.user.username}}</h1>
-                        <p class="text-white">Software Developer</p>
+                        <p class="text-white">{{profile.title}}</p>
                         <div class="mt-6 flex flex-wrap gap-4 justify-center">
-                            <a href="#" class="bg-primary hover:bg-neutral text-white py-2 px-4 rounded">Collaborer</a>
+                            <a href="{% url 'collaborations:collaborations_list' profile.user.pk %}" class="bg-primary hover:bg-neutral text-white py-2 px-4 rounded">Collaborer</a>
                             <!-- <a href="#" class="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">Resume</a> -->
                         </div>
                     </div>
                     <hr class="my-6 border-t border-gray-300">
-                    <div class="flex flex-col">
-                        <span class="text-white uppercase font-bold tracking-wider mb-2">Skills</span>
-                        <ul>
-                            <li class="mb-2">JavaScript</li>
-                            <li class="mb-2">React</li>
-                            <li class="mb-2">Node.js</li>
-                            <li class="mb-2">HTML/CSS</li>
-                            <li class="mb-2">Tailwind Css</li>
-                        </ul>
+                    <div class="flex flex-col text-center">
+                        <span class="text-white uppercase font-bold tracking-wider mb-2">Tags</span>
+                        <div class="flex flex-wrap">
+                            <div class="badge badge-primary badge-outline mx-3">ecologie</div>
+                            <div class="badge badge-primary badge-outline mx-3">lifestyle</div>
+                            <div class="badge badge-primary badge-outline mx-3">tech</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -64,9 +62,7 @@
                         luctus risus rhoncus id.
                     </p> -->
                     <p class="text-white text-center">
-                        <br>
-                        <br>
-                        Remplissez votre description
+                        {{profile.description}}
                         <br>
                         <br>
                     </p>
@@ -118,7 +114,7 @@
                     </div>
 
 
-                    <h2 class=" text-center text-xl font-bold mt-6 mb-4">Experience</h2>
+                    <!-- <h2 class=" text-center text-xl font-bold mt-6 mb-4">Experience</h2>
                     <div class="mb-6">
                         <div class="flex justify-between flex-wrap gap-2 w-full">
                             <span class="text-white font-bold">Web Developer</span>
@@ -160,7 +156,7 @@
                             tortor ullamcorper, ut vestibulum velit convallis. Aenean posuere risus non velit egestas
                             suscipit.
                         </p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

@@ -10,6 +10,6 @@ urlpatterns = [
     path("profile/<int:pk>/", get_profile, name="profile"),
     path("account/", update_user, name="account"),
     path("creators_list/", get_profile_list_by_type, name="creators"),
-    # path("advertisers/", get_profile_list_by_type, name="advertisers"),
-    # path("associations/", get_profile_list_by_type, name="associations"),
+    path("advertisers/", get_profile_list_by_type, name="advertisers"),
+    path("associations/", get_profile_list_by_type, name="associations"),
 ]

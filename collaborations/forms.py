@@ -1,7 +1,7 @@
 import json
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from collaborations.models import Campaign
+from collaborations.models import *
 from users.models import CustomUser
 
 
@@ -71,6 +71,34 @@ class CampaignCreationStepThreeForm(forms.Form):
         fields = ["partner"]
 
 class CampaignCreationStepFourForm(forms.Form):
+
+    accept_legal_terms = forms.BooleanField(
+        widget=forms.CheckboxInput(
+            attrs={"class": "form-check-input", "type": "radio"}
+        ),
+        required=True,
+    )
+
+
+class CampaignJoiningStepOneForm(forms.ModelForm):
+
+    class Meta:
+        model = CollaboratorRequest
+        fields = [
+            "message",
+        ]
+
+        widgets = {
+            "message": forms.Textarea(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Ecrivez un message décrivant votre",
+                }
+            )
+        }
+
+
+class CampaignJoiningStepTwoForm(forms.Form):
 
     accept_legal_terms = forms.BooleanField(
         widget=forms.CheckboxInput(

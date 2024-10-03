@@ -3,17 +3,25 @@
 {% block content %}
 <div class="min-h-screen p-12">
     {% include 'collaborations/partials/campaign_menu.html' %}
-    <div class="card lg:card-side bg-base-100 shadow-xl mt-6">
-        <figure>
-            <img src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.webp" alt="Album" />
-        </figure>
-        <div class="card-body">
-            <h2 class="card-title">{{campaign.name}}</h2>
-            <p>Click the button to listen on Spotiwhy app.</p>
-            <p>{{campaign.pk}}</p>
-            
+    <div class="container mx-auto bg-base-200 p-12 box-border rounded-lg mb-12">
+        <div class="card lg:card-side bg-base-100 shadow-xl mt-6">
+            <figure>
+                <img src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.webp" alt="Album" />
+            </figure>
+            <div class="card-body">
+                <h2 class="card-title">{{campaign.name}}</h2>
+                <h3>Createur: {{campaign.collaboration_creator}}</h3>
+                <p>Click the button to listen on Spotiwhy app.</p>
+                <p>{{campaign.pk}}</p>
+                <p>Partenaire : {{campaign.partner}}</p>
+                <div class="flex justify-end">
+                    <button class="btn btn-outline btn-primary">Participer</button>
+                </div>
+                
+            </div>
         </div>
     </div>
+   
 
 </div>
 {% endblock %}

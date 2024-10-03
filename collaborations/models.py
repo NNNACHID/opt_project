@@ -47,7 +47,6 @@ class Campaign(Collaboration):
         verbose_name = _("Campaign")
         verbose_name_plural = _("Campaigns")
 
-
     def __str__(self):
         return self.name
 
@@ -56,3 +55,27 @@ class Campaign(Collaboration):
 
     def remove_collaborator(self, collaborator):
         self.collaborators.remove(collaborator)
+
+class CollaborationRequest(models.Model):
+    campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
+    message = models.TextField(verbose_name=_("Message"), null=True, blank=True)
+    status = models.CharField(
+        max_length=20,
+        choices=[
+            ("pending", "Pending"),
+            ("accepted", "Accepted"),
+            ("rejected", "Rejected"),
+        ],
+        default="pending",
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        abstract = True
+
+
+class PartnerRequest(CollaborationRequest):
+    partner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
+
+class CollaboratorRequest(CollaborationRequest):
+    collaborator = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
