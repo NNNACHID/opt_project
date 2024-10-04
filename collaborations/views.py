@@ -44,6 +44,23 @@ class CampaignCreationWizardView(SessionWizardView):
         return redirect("collaborations:collaborations_list", pk)
 
 
+class CampaignJoiningWizardView(SessionWizardView):
+    form_list = JOINING_FORMS
+    template_name = "join_campaign.html"
+
+    def done(self, form_list, **kwargs):
+        form_data = [form.cleaned_data for form in form_list]
+        collaboration_request = CollaboratorRequest(
+            message=form_data[0]["message"],
+            campaign=self.kwargs.get("campaign"),
+            collaborator=self.request.user,
+        )
+
+        collaboration_request.save()
+        messages.success(self.request, "Demande de participation envoyer !")
+        return redirect("home")
+
+
 @login_required(login_url="users:login")
 def create_campaign(request):
     wizard_view = CampaignCreationWizardView.as_view()

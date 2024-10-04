@@ -46,9 +46,7 @@ class SocialMediaLinks(models.Model):
 
 
 class CustomUserProfile(models.Model):
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True
-    )
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     name = models.CharField(max_length=255, unique=True, default="SOME STRING")
     title = models.TextField(
         verbose_name="Short description",
