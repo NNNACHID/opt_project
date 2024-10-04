@@ -15,7 +15,9 @@
                 <p>{{campaign.pk}}</p>
                 <p>Partenaire : {{campaign.partner}}</p>
                 <div class="flex justify-end">
+                    <a href="{% url 'collaborations:join_campaign' campaign_pk=campaign.pk %}">
                     <button class="btn btn-outline btn-primary">Participer</button>
+                    </a>
                 </div>
                 
             </div>

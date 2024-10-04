@@ -46,7 +46,7 @@ class CampaignCreationWizardView(SessionWizardView):
 
 class CampaignJoiningWizardView(SessionWizardView):
     form_list = JOINING_FORMS
-    template_name = "join_campaign.html"
+    template_name = "collaborations/campaign_joining.html"
 
     def done(self, form_list, **kwargs):
         form_data = [form.cleaned_data for form in form_list]
@@ -68,10 +68,10 @@ def create_campaign(request):
 
 
 @login_required
-def join_campaign(request, campaign_pk, campaign_user_pk):
+def join_campaign(request, campaign_pk):
 
     campaign = get_object_or_404(Campaign, pk=campaign_pk)
-    campaign_page_user = get_object_or_404(CustomUser, pk=campaign_user_pk)
+    # campaign_page_user = get_object_or_404(CustomUser, pk=campaign_user_pk)
     wizard_view = CampaignJoiningWizardView.as_view()
     return wizard_view(request, campaign=campaign)
 

@@ -20,7 +20,7 @@ urlpatterns = [
         name="campaign_page",
     ),
     path(
-        "join_campaign/<int:campaign_pk>/<int:campaign_user_pk>/",
+        "join_campaign/<int:campaign_pk>/",
         join_campaign,
         name="join_campaign",
     ),

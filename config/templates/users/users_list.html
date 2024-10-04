@@ -13,7 +13,7 @@
             {% for profile in profiles %}
             <a href="{% url 'users:profile' profile.user.pk %}">
             <div
-                class="bg-base-100 dark:bg-base-100 relative shadow-xl overflow-hidden hover:shadow-2xl group rounded-xl p-5 transition-all duration-300 transform mb-5 ">
+                class="bg-base-100 dark:bg-base-100 relative shadow-xl overflow-hidden hover:shadow-2xl group rounded-xl p-5 transition-all duration-300 transform mb-5 w-96">
                 <div class="flex items-center gap-4">
                     <img src="{{profile.profile_picture.url}}"
                         class="w-32 group-hover:w-36 group-hover:h-36 h-32 object-center object-cover rounded-full transition-all duration-300 delay-300 transform" />
