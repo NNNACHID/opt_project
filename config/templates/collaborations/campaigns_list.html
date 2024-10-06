@@ -28,7 +28,7 @@
                         <p>Debut: {{campaign.start_date}}</p>
                         <p>Fin: {{campaign.end_date}}</p>
                     </div>
-                    <a href="{% url 'collaborations:campaign_page' campaign_pk=campaign.pk %}"><button class="btn btn-outline btn-primary my-1">Detail</button></a>
+                    <a href="{% url 'collaborations:campaign_page' campaign_pk=campaign.pk campaign_user_pk=campaign_page_user.pk %}"><button class="btn btn-outline btn-primary my-1">Detail</button></a>
                 </article>
             {% endfor %}
         </div>

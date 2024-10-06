@@ -32,15 +32,15 @@ class Campaign(Collaboration):
         ),
     )
     collaborators = models.ManyToManyField(
-        CustomUser, related_name="campaigns_participated"
+        CustomUser, related_name="campaigns_participated", blank=True
     )
     partner = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,
         related_name="campaign_partner",
         limit_choices_to={"role": "advertiser"},
-        null=True,
         blank=True,
+        null=True
     )
 
     class Meta:

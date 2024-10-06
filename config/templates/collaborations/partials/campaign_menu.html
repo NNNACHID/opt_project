@@ -1,7 +1,7 @@
 <header class="bg-base-100">
     <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <div class="mb-12">
-            <a href="{% url 'collaborations:collaborations_list' user.pk %}">
+            <a href="{% url 'collaborations:collaborations_list' campaign_page_user.pk %}">
             <h1 class="text-center text-white text-3xl font-extrabold  sm:text-5xl">
                 Collabs
             </h1>
@@ -17,9 +17,18 @@
                 <button class="btn btn-primary" type="button">
                     Campagnes participées
                 </button>
-                <button class="btn btn-primary" type="button">
-                    Demandes de participation
-                </button>
+                {% if campaign_page_user == user %}
+                    {% if user.role == "advertiser" %}
+                    <button class="btn btn-primary" type="button">
+                        Demandes de partenariat
+                    </button>
+                    {% else %}
+                    <button class="btn btn-primary" type="button">
+                        Demandes de participation
+                    </button>
+                    {% endif %}
+                {% else %}
+                {% endif %}
                 <a class="btn btn-primary mr-4" href="{% url 'collaborations:campaign_creation' %}">Crée une
                     campagne</a>
             </div>

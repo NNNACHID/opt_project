@@ -3,4 +3,5 @@ from collaborations.models import *
 
 
 admin.site.register(Campaign)
-# Register your models here.
+admin.site.register(CollaboratorRequest)
+admin.site.register(PartnerRequest)
