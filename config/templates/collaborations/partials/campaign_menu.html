@@ -23,9 +23,11 @@
                         Demandes de partenariat
                     </button>
                     {% else %}
+                    <a href="{% url 'collaborations:campaigns_requests' %}">
                     <button class="btn btn-primary" type="button">
                         Demandes de participation
                     </button>
+                    </a>
                     {% endif %}
                 {% else %}
                 {% endif %}

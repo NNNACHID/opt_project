@@ -119,11 +119,11 @@ def get_campaign_page(request, campaign_pk, campaign_user_pk):
 
 
 @login_required(login_url="users:login")
-def campaign_collaborator_requests(request):
+def collaborator_requests(request):
     user = request.user
-    user_campaigns = Campaign.objects.filter(campaign_creator=user)
+    user_campaigns = Campaign.objects.filter(collaboration_creator=user)
     requests = []
-    collaboration_requests = CampaignCollaboratorRequest.objects.all()
+    collaboration_requests = CollaboratorRequest.objects.all()
     for campaign in user_campaigns:
         for collaboration_request in collaboration_requests:
             if collaboration_request.campaign == campaign:
@@ -133,7 +133,7 @@ def campaign_collaborator_requests(request):
         "requests": requests,
         "campaign_page_user": user,
     }
-    return render(request, "campaigns_requests_list.html", context)
+    return render(request, "collaborations/collaboration_requests_list.html", context)
 
 
 # @login_required(login_url="users:login")

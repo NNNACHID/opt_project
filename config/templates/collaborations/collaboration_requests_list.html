@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="min-h-screen">
+    {% include 'collaborations/partials/campaign_menu.html' %}
+    <div class="container mx-auto bg-base-200 p-12 box-border rounded-lg mb-12">
+        <div class="flex flex-col items-center">
+            {% for request in requests %}
+                <div class="card bg-base-100 text-neutral-content w-96">
+                    <div class="card-body items-center text-center">
+                        <h2 class="card-title">Demande de participation n°{{request.id}}</h2>
+                        <p>We are using cookies for no reason.</p>
+                        <div class="card-actions justify-end">
+                            <button class="btn btn-primary">Accept</button>
+                            <button class="btn btn-ghost">Deny</button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}
