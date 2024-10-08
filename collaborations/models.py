@@ -56,6 +56,14 @@ class Campaign(Collaboration):
     def remove_collaborator(self, collaborator):
         self.collaborators.remove(collaborator)
 
+    def add_partner(self, partner):
+        self.partner = partner
+        self.save()
+
+    def remove_partner(self):
+        self.partner = None
+        self.save()
+
 class CollaborationRequest(models.Model):
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
     message = models.TextField(verbose_name=_("Message"), null=True, blank=True)

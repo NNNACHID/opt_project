@@ -36,10 +36,10 @@ class CampaignCreationWizardView(SessionWizardView):
             collaboration_creator=self.request.user,
         )
         campaign.save()
-        # partner_request = CampaignPartnerRequest.objects.create(
-        #     campaign=campaign, partner=campaign.partner
-        # )
-        # partner_request.save()
+        partner_request = PartnerRequest.objects.create(
+            campaign=campaign, partner=campaign.partner
+        )
+        partner_request.save()
         messages.success(self.request, "Campagne créée avec succès!")
         return redirect("collaborations:collaborations_list", pk)
 
@@ -121,12 +121,14 @@ def get_campaign_page(request, campaign_pk, campaign_user_pk):
 @login_required(login_url="users:login")
 def collaborator_requests(request):
     user = request.user
-    user_campaigns = Campaign.objects.filter(collaboration_creator=user)
+    user_campaigns = Campaign.objects.filter(
+        collaboration_creator=user
+    )
     requests = []
     collaboration_requests = CollaboratorRequest.objects.all()
     for campaign in user_campaigns:
         for collaboration_request in collaboration_requests:
-            if collaboration_request.campaign == campaign:
+            if collaboration_request.campaign == campaign and collaboration_request.status == "pending":
                 requests.append(collaboration_request)
 
     context = {
@@ -134,6 +136,54 @@ def collaborator_requests(request):
         "campaign_page_user": user,
     }
     return render(request, "collaborations/collaboration_requests_list.html", context)
+
+
+@login_required(login_url="users:login")
+def accept_collaborator_request(request, request_id):
+    request_obj = CollaboratorRequest.objects.get(pk=request_id)
+    campaign = get_object_or_404(Campaign, id=request_obj.campaign_id)
+    request_obj.status="accepted"
+    campaign.add_collaborator(request_obj.collaborator)
+    campaign.save()
+    request_obj.save()
+    messages.info(request, "Paiement éffectué !")
+    return redirect("home")
+
+
+@login_required
+def refuse_collaborator_request(request, request_id):
+    request_obj = CollaboratorRequest.objects.get(pk=request_id)
+    request_obj.status = "rejected"
+    request_obj.save()
+    return redirect("home")
+
+
+@login_required(login_url="users:login")
+def partner_requests(request):
+    user = request.user
+    partner_requests = PartnerRequest.objects.filter(partner=user, status="pending")
+    context = {"requests": partner_requests, "campaign_page_user": user}
+    return render(request, "collaborations/collaboration_requests_list.html", context)
+
+
+@login_required(login_url="users:login")
+def accept_partner_request(request, request_id):
+    request_obj = PartnerRequest.objects.get(pk=request_id)
+    request_obj.status = "accepted"
+    request_obj.save()
+    messages.info(request, "Paiement éffectué !")
+    return redirect("home")
+
+
+@login_required
+def refuse_partner_request(request, request_id):
+    request_obj = PartnerRequest.objects.get(pk=request_id)
+    campaign = get_object_or_404(Campaign, id=request_obj.campaign_id)
+    campaign.remove_partner()
+    request_obj.status = "rejected"
+    campaign.save()
+    request_obj.save()
+    return redirect("home")
 
 
 # @login_required(login_url="users:login")

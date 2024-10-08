@@ -19,11 +19,13 @@
                 </button>
                 {% if campaign_page_user == user %}
                     {% if user.role == "advertiser" %}
+                    <a href="{% url 'collaborations:partners_requests' %}">
                     <button class="btn btn-primary" type="button">
                         Demandes de partenariat
                     </button>
+                    </a>
                     {% else %}
-                    <a href="{% url 'collaborations:campaigns_requests' %}">
+                    <a href="{% url 'collaborations:collaborator_requests' %}">
                     <button class="btn btn-primary" type="button">
                         Demandes de participation
                     </button>

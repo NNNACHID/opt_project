@@ -25,9 +25,34 @@ urlpatterns = [
         name="join_campaign",
     ),
     path(
-        "campaigns_requests_list",
+        "collaborator_requests_list",
         collaborator_requests,
-        name="campaigns_requests",
+        name="collaborator_requests",
+    ),
+    path(
+        "partners_requests_list",
+        partner_requests,
+        name="partners_requests",
+    ),
+    path(
+        "accept_collaborator_request/<int:request_id>/",
+        accept_collaborator_request,
+        name="accept_collaborator_request",
+    ),
+    path(
+        "refuse_collaborator_request/<int:request_id>/",
+        refuse_collaborator_request,
+        name="refuse_collaborator_request",
+    ),
+    path(
+        "accept_partner_request/<int:request_id>/",
+        accept_partner_request,
+        name="accept_partner_request",
+    ),
+    path(
+        "refuse_partner_request/<int:request_id>/",
+        refuse_partner_request,
+        name="refuse_partner_request",
     ),
     # path(
     #     "campaigns/create/<int:collaborator_id>/",
@@ -49,9 +74,6 @@ urlpatterns = [
     #     "campaigns_created_list/<int:pk>/",
     #     get_campaigns_created_list,
     #     name="campaigns_created_list",
-    # ),
-    # path(
-    #     "partner_requests_list", campaign_partner_requests, name="partner_requests_list"
     # ),
     # path(
     #     "accept_campaign_collaborator_request/<int:request_id>/",
