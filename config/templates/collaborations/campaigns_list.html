@@ -5,7 +5,8 @@
     {% include 'collaborations/partials/campaign_menu.html' %}
     <div class="container mx-auto bg-base-200 p-12 box-border rounded-lg mb-12">
         <div class="flex flex-col items-center">
-            {% for campaign in campaigns %}
+            
+            {% for campaign_data in campaigns %}
                 <article class="rounded-lg  bg-base-100 p-4 shadow-sm transition hover:shadow-xl sm:p-6 mb-9 w-3/5">
                     <div class="flex justify-between mb-3">
                     <span class="inline-block rounded bg-primary p-2 text-white">
@@ -18,18 +19,20 @@
                                 d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                         </svg>
                     </span>
-                    <h2 class="ml-12 text-lg font-medium text-white">{{campaign.name}}</h2>
-                    <p>Creation: {{campaign.created_at|date:'d/m/Y'}}</p>
+                    <h2 class="ml-12 text-lg font-medium text-white">{{campaign_data.campaign.name}}</h2>
+                    <p>Creation: {{campaign_data.campaign.created_at|date:'d/m/Y'}}</p>
                     </div>
                     <h3 class="text-lg font-medium text-white my-1">
-                        Createur: {{campaign.collaboration_creator}}
+                        Createur: {{campaign_data.campaign.collaboration_creator}}
                     </h3>
                     <div class="flex justify-between my-3">
-                        <p>Debut: {{campaign.start_date}}</p>
-                        <p>Fin: {{campaign.end_date}}</p>
+                        <p>Debut: {{campaign_data.campaign.start_date}}</p>
+                        <p>Fin: {{campaign_data.campaign.end_date}}</p>
                     </div>
-                    <a href="{% url 'collaborations:campaign_page' campaign_pk=campaign.pk campaign_user_pk=campaign_page_user.pk %}"><button class="btn btn-outline btn-primary my-1">Detail</button></a>
+                    <a href="{% url 'collaborations:campaign_page' campaign_pk=campaign_data.campaign.pk campaign_user_pk=campaign_page_user.pk %}"><button class="btn btn-outline btn-primary my-1">Detail</button></a>
                 </article>
+            {% empty %}
+            <p>Aucune collaboration pour le moment</p>
             {% endfor %}
         </div>
     </div>

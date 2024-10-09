@@ -11,12 +11,16 @@
 
         <div class="flex flex-col  gap-4 xl:flex-row md:items-center md:justify-center">
             <div class="flex items-center gap-4">
+                <a href="{% url 'collaborations:created_collaborations_list' campaign_page_user.pk %}">
                 <button class="btn btn-primary" type="button">
                     Campagnes crée
                 </button>
+                </a>
+                <a href="{% url 'collaborations:participate_collaborations_list' campaign_page_user.pk %}">
                 <button class="btn btn-primary" type="button">
                     Campagnes participées
                 </button>
+                </a>
                 {% if campaign_page_user == user %}
                     {% if user.role == "advertiser" %}
                     <a href="{% url 'collaborations:partners_requests' %}">

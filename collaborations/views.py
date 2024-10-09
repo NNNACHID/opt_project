@@ -82,24 +82,66 @@ def get_collaborations_list(request, pk):
     user = get_object_or_404(CustomUser, pk=pk)
     campaigns_with_collaborators = []
 
-    campaigns = Campaign.objects.filter(collaboration_creator=user)
-    for campaign in campaigns:
+    campaigns_created = Campaign.objects.filter(collaboration_creator=user)
+    for campaign in campaigns_created:
         campaign_data = {
             "campaign": campaign,
             "collaborators": campaign.collaborators.all(),
         }
         campaigns_with_collaborators.append(campaign_data)
 
-    # collaborations = Campaign.objects.filter(collaborators=user)
-    # for campaign in collaborations:
-    #     campaign_data = {
-    #         "campaign": campaign,
-    #         "collaborators": campaign.collaborators.all(),
-    #     }
-    #     campaigns_with_collaborators.append(campaign_data)
+    collaborations = Campaign.objects.filter(collaborators=user)
+    for campaign in collaborations:
+        campaign_data = {
+            "campaign": campaign,
+            "collaborators": campaign.collaborators.all(),
+        }
+        campaigns_with_collaborators.append(campaign_data)
 
     context = {
-        "campaigns": campaigns,
+        "campaigns": campaigns_with_collaborators,
+        "campaign_page_user": user,
+    }
+    print(context)
+    return render(request, "collaborations/campaigns_list.html", context)
+
+
+@login_required(login_url="users:login")
+def get_collaborations_participate_list(request, pk):
+    campaigns_with_collaborators = []
+    user = get_object_or_404(CustomUser, pk=pk)
+
+    collaborations = Campaign.objects.filter(collaborators=user)
+    for campaign in collaborations:
+        campaign_data = {
+            "campaign": campaign,
+            "collaborators": campaign.collaborators.all(),
+        }
+        campaigns_with_collaborators.append(campaign_data)
+
+    context = {
+        "campaigns": campaigns_with_collaborators,
+        "campaign_page_user": user,
+    }
+    return render(request, "collaborations/campaigns_list.html", context)
+
+
+@login_required(login_url="users:login")
+def get_collaborations_created_list(request, pk):
+
+    user = get_object_or_404(CustomUser, pk=pk)
+    campaigns_with_collaborators = []
+
+    campaigns_created = Campaign.objects.filter(collaboration_creator=user)
+    for campaign in campaigns_created:
+        campaign_data = {
+            "campaign": campaign,
+            "collaborators": campaign.collaborators.all(),
+        }
+        campaigns_with_collaborators.append(campaign_data)
+
+    context = {
+        "campaigns": campaigns_with_collaborators,
         "campaign_page_user": user,
     }
     return render(request, "collaborations/campaigns_list.html", context)
@@ -184,23 +226,3 @@ def refuse_partner_request(request, request_id):
     campaign.save()
     request_obj.save()
     return redirect("home")
-
-
-# @login_required(login_url="users:login")
-# def get_campaigns_participate_list(request, pk):
-#     campaigns_with_collaborators = []
-#     user = get_object_or_404(CustomUser, pk=pk)
-
-#     collaborations = Campaign.objects.filter(collaborators=user)
-#     for campaign in collaborations:
-#         campaign_data = {
-#             "campaign": campaign,
-#             "collaborators": campaign.collaborators.all(),
-#         }
-#         campaigns_with_collaborators.append(campaign_data)
-
-#     context = {
-#         "campaigns_with_collaborators": campaigns_with_collaborators,
-#         "campaign_page_user": user,
-#     }
-#     return render(request, "campaigns_participate_list.html", context)

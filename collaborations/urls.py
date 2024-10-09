@@ -10,6 +10,16 @@ urlpatterns = [
         name="collaborations_list",
     ),
     path(
+        "created_collaborations_list/<int:pk>",
+        get_collaborations_created_list,
+        name="created_collaborations_list",
+    ),
+    path(
+        "participate_collaborations_list/<int:pk>",
+        get_collaborations_participate_list,
+        name="participate_collaborations_list",
+    ),
+    path(
         "campaign_creation/",
         create_campaign,
         name="campaign_creation",
