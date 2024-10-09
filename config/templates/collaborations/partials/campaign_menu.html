@@ -2,42 +2,70 @@
     <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <div class="mb-12">
             <a href="{% url 'collaborations:collaborations_list' campaign_page_user.pk %}">
-            <h1 class="text-center text-white text-3xl font-extrabold  sm:text-5xl">
-                Collabs
-            </h1>
+                <h1 class="text-center text-white text-3xl font-extrabold  sm:text-5xl">
+                    Collabs
+                </h1>
             </a>
         </div>
 
 
         <div class="flex flex-col  gap-4 xl:flex-row md:items-center md:justify-center">
             <div class="flex items-center gap-4">
-                <a href="{% url 'collaborations:created_collaborations_list' campaign_page_user.pk %}">
-                <button class="btn btn-primary" type="button">
-                    Campagnes crée
-                </button>
+                {% url 'collaborations:created_collaborations_list' campaign_page_user.pk as created_url %}
+                <a href="{{created_url}}">
+                {% if request.get_full_path == created_url %}
+                    <button class="btn btn-active btn-primary" type="button">
+                        Campagnes créées
+                    </button>
+                {% else %}
+                    <button class="btn btn-outline btn-primary" type="button">
+                        Campagnes créées
+                    </button>
+                {% endif %}
                 </a>
-                <a href="{% url 'collaborations:participate_collaborations_list' campaign_page_user.pk %}">
-                <button class="btn btn-primary" type="button">
-                    Campagnes participées
-                </button>
+                {% url 'collaborations:participate_collaborations_list' campaign_page_user.pk as participate_url %}
+                <a href="{{participate_url}}">
+                    {% if request.get_full_path == participate_url %}
+                    <button class="btn btn-active btn-primary" type="button">
+                        Campagnes participées
+                    </button>
+                    {% else %}
+                    <button class="btn btn-outline btn-primary" type="button">
+                        Campagnes participées
+                    </button>
+                    {% endif %}
                 </a>
                 {% if campaign_page_user == user %}
                     {% if user.role == "advertiser" %}
-                    <a href="{% url 'collaborations:partners_requests' %}">
-                    <button class="btn btn-primary" type="button">
-                        Demandes de partenariat
-                    </button>
+                    {% url 'collaborations:partners_requests' as partners_requests_url %}
+                    <a href="{{partners_requests_url}}">
+                        {% if request.get_full_path == partners_requests_url %}
+                        <button class="btn btn-active btn-primary" type="button">
+                            Demandes de partenariat
+                        </button>
+                        {% else %}
+                        <button class="btn btn-outline btn-primary" type="button">
+                            Demandes de partenariat
+                        </button>
+                        {% endif %}
                     </a>
                     {% else %}
-                    <a href="{% url 'collaborations:collaborator_requests' %}">
-                    <button class="btn btn-primary" type="button">
-                        Demandes de participation
-                    </button>
+                    {% url 'collaborations:collaborator_requests' as collaborator_requests_url %}
+                    <a href="{{collaborator_requests_url}}">
+                        {% if request.get_full_path == collaborator_requests_url %}
+                        <button class="btn btn-active btn-primary" type="button">
+                            Demandes de participation
+                        </button>
+                        {% else %}
+                        <button class="btn btn-outline btn-primary" type="button">
+                            Demandes de participation
+                        </button>
+                        {% endif %}
                     </a>
                     {% endif %}
                 {% else %}
                 {% endif %}
-                <a class="btn btn-primary mr-4" href="{% url 'collaborations:campaign_creation' %}">Crée une
+                <a class="btn btn-outline btn-primary mr-4" href="{% url 'collaborations:campaign_creation' %}">Crée une
                     campagne</a>
             </div>
         </div>

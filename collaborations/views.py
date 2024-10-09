@@ -102,7 +102,6 @@ def get_collaborations_list(request, pk):
         "campaigns": campaigns_with_collaborators,
         "campaign_page_user": user,
     }
-    print(context)
     return render(request, "collaborations/campaigns_list.html", context)
 
 
